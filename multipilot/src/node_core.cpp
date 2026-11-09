@@ -183,6 +183,16 @@ void Core::handle(const char* p, uint32_t nowUs) {
             }
         }
         status(nowUs);
+    } else if (!strcmp(p, "R")) {
+        // Restart (the S3's "restart everything" button). Needs the restart
+        // hook the update path provides.
+        if (!update_) {
+            ++rejected;
+            send("r,err,unsupported");
+        } else {
+            send("r,ok");
+            update_->restart();
+        }
     } else if (p[0] == 'P' && p[1] == ',' && parseSlots(p + 2)) {
         mhz_ = 0;
         needTune_ = needGain_ = false;

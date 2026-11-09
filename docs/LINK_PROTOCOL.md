@@ -27,6 +27,7 @@ bytes, bad checksums and lower-case hex (`node` console: `lines ok/bad/long`).
 | `P,<MHz>,<MHz>,...` | **Scan mode** (firmware 2): one entry per slot, up to 8, `0` = slot off. All or nothing: any bad entry rejects the list and the old one stays. All entries 0 = no frequency. |
 | `G,<gain>` | Forced receive gain index, 0 to the C5's limit (89 on chip v1.0). Higher is rejected and the old gain kept. Applies in both modes and is saved across reboots. |
 | `Q` | Status request. |
+| `R` | Restart the C5. It answers `r,ok` and restarts; the host sees it go offline for a moment and sends `P` again when it is back. Ignored (`r,err,unsupported`) by a build without the update hook. |
 | `F,<MHz>` | Single-frequency mode on one frequency (the firmware 1 protocol). Leaves scan mode. 5180-5917 or the C5 reports `ERR_FREQ`. |
 | `U,<bytes>,<sha256>` `E` `A` | **Firmware update** (firmware 3), see below. |
 

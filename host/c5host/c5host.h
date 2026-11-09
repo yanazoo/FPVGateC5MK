@@ -54,6 +54,9 @@ public:
     // Receiver gain index, 0..89. 30 is a good bench start; see
     // INTEGRATION_GUIDE.md for choosing it.
     bool setGain(int gain);
+    // Ask the C5 to restart (firmware with the R command; older firmware
+    // ignores it).
+    void restart() { send("R"); }
 
     // Call once after opening the UART.
     void begin(uint32_t nowUs);

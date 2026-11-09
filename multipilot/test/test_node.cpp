@@ -518,6 +518,10 @@ int main() {
         rx(frame("E"));
         CHECK(up.finished && up.restarts == 1 && io.out.back().rfind("u,done", 0) == 0);
 
+        // R: restart on request (the S3's restart button).
+        rx(frame("R"));
+        CHECK(up.restarts == 2 && io.out.back().rfind("r,ok", 0) == 0);
+
         // A short image fails the check and does not restart.
         FakeIo io2;
         FakeUpdate up2;
